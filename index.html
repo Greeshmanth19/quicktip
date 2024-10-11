@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Tip Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tip Your Waiter</h2>
+        <p>Select the waiter you'd like to tip:</p>
+
+        <form id="tip-form">
+            <label for="worker">Choose a waiter:</label>
+            <select id="worker" name="worker">
+                <option value="bbhanu96577@axl">Bhanu</option>
+                <option value="worker2@okicici">Jane Smith</option>
+                <option value="worker3@okhdfcbank">Mike Ross</option>
+            </select><br><br>
+
+            <label for="amount">Enter Amount (₹):</label>
+            <input type="number" id="amount" name="amount" min="1" max="500" value="20"><br><br>
+
+            <button type="button" onclick="generateUPILink()">Pay Now</button>
+        </form>
+
+        <p id="upi-link-container" style="display:none;">
+            Click here to pay: 
+            <a id="upi-link" href="#" target="_blank">Pay ₹<span id="amount-display"></span></a>
+        </p>
+    </div>
+
+    <script>
+        function generateUPILink() {
+            // Get worker UPI ID and amount
+            const worker = document.getElementById("worker").value;
+            const amount = document.getElementById("amount").value;
+
+            // Generate UPI link
+            const upiLink = "upi://pay?pa=${worker}&pn=Waiter&am=${amount}&cu=INR";
+
+            // Display the link
+            document.getElementById("upi-link").href = upiLink;
+            document.getElementById("upi-link-container").style.display = 'block';
+            document.getElementById("amount-display").textContent = amount;
+        }
+    </script>
+
+</body>
+</html>
